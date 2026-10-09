@@ -11,7 +11,11 @@ def get_order_status(order_id: str) -> str:
     # Fake database result, same as your curl test
     return '{"status": "Shipped", "courier": "BlueDart", "eta": "Friday, 16 Oct"}'
 
-model = ChatOllama(model="qwen2.5:7b")
+import os
+model = ChatOllama(
+    model="qwen2.5:7b",
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+)
 agent = create_agent(model, tools=[get_order_status])
 
 result = agent.invoke({"messages": [{"role": "user", "content": "Check orders ORD-1042 and ORD-2077"}]})
