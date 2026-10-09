@@ -1,3 +1,9 @@
+import os
+llm = ChatOllama(
+    model="qwen2.5:7b",
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+).bind_tools(tools)
+
 from typing import Literal
 from dotenv import load_dotenv
 load_dotenv()
