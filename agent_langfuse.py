@@ -11,7 +11,7 @@ from langchain_ollama import ChatOllama
 @tool
 def get_order_status(order_id: str) -> str:
     """Look up the current status of a customer order by its order ID, e.g. ORD-1042."""
-    # Fake database result, same as your curl test
+    # Fake database result, same as my curl test
     return '{"status": "Shipped", "courier": "BlueDart", "eta": "Friday, 16 Oct"}'
 
 import os
@@ -26,7 +26,7 @@ result = agent.invoke(
     config={"callbacks": [langfuse_handler]},
 )
 
-# Print every step so you can see what LangChain did for you
+# Print every step so we can see what LangChain did for us
 for msg in result["messages"]:
     print(f"\n[{msg.type}]", msg.content or getattr(msg, "tool_calls", ""))
 
